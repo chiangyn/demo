@@ -20,17 +20,21 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ycfy.weixin.model.UserInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT @@IDENTITY
+    </selectKey>
     insert into user_info (id, nick, pwd
       )
     values (#{id,jdbcType=INTEGER}, #{nick,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ycfy.weixin.model.UserInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+      SELECT @@IDENTITY
+    </selectKey>
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
+      id,
       <if test="nick != null" >
         nick,
       </if>
@@ -39,9 +43,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
+      #{id,jdbcType=INTEGER},
       <if test="nick != null" >
         #{nick,jdbcType=VARCHAR},
       </if>

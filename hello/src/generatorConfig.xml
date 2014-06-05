@@ -76,6 +76,8 @@
 			<!-- 指定列的java数据类型 
 			<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> 
 			 -->
+			 <!-- SELECT LAST_INSERT_ID() -->
+			 <generatedKey column="id" sqlStatement="SELECT @@IDENTITY" />
 		</table>
 	</context>
 </generatorConfiguration>  
